@@ -6,11 +6,14 @@ export default class extends Phaser.Scene {
     super({ key: 'BootScene' })
   }
 
+  init () {
+
+  }
+
   preload () {
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
     this.add.text(100, 100, 'loading fonts...')
-
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
 
@@ -24,8 +27,13 @@ export default class extends Phaser.Scene {
 
   update () {
     if (this.fontsReady) {
-      this.scene.start('SplashScene')
+      this.scene.start('SplashScene', 'hello from BootScene')
+      this.scene.launch()
     }
+  }
+
+  create () {
+
   }
 
   fontsLoaded () {
