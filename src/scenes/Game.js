@@ -1,6 +1,8 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 
+let ground
+let logo
 let player
 let player2
 let cursors
@@ -17,7 +19,7 @@ export default class extends Phaser.Scene {
   preload () {
     this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
     this.load.image('ground', 'asserts/Bastest.png')
-    this.load.image('logo', 'asserts/balls/volleyball.png')
+    this.load.image('logo', 'asserts/balls/BallTest.png')
     this.load.image('filet', 'asserts/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
   }
@@ -25,7 +27,7 @@ export default class extends Phaser.Scene {
   create () {
     this.add.image(200, 280, 'sky')
 
-    const ground = this.physics.add.staticGroup()
+    ground = this.physics.add.staticGroup()
     ground.create(200, 850, 'ground')
 
     const filet = this.physics.add.staticGroup()
@@ -39,15 +41,16 @@ export default class extends Phaser.Scene {
     player2.setBounce(0.2)
     player2.setCollideWorldBounds(true)
 
-    const particles = this.add.particles('red')
+    const particles = this.add.particles('logo')
     const emitter = particles.createEmitter({
-      speed: 100,
+      speed: { start: 10, end: 90 },
       scale: { start: 1, end: 0 },
       blendMode: 'ADD'
     })
 
-    const logo = this.physics.add.image(400, 100, 'logo')
+    logo = this.physics.add.sprite(450, 100, 'logo')
 
+    logo.body.setCircle(20)
     logo.setVelocity(100, 200)
     logo.setBounce(1, 1)
     logo.setCollideWorldBounds(true)
@@ -55,6 +58,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(logo, player)
     this.physics.add.collider(logo, player2)
 
+    emitter.setAlpha(0.3)
     emitter.startFollow(logo)
 
     this.anims.create({
@@ -91,12 +95,13 @@ export default class extends Phaser.Scene {
   }
 
   update () {
+    // player
     if (cursors.left.isDown) {
-      player.setVelocityX(-160)
+      player.setVelocityX(-200)
 
       player.anims.play('left', true)
     } else if (cursors.right.isDown) {
-      player.setVelocityX(160)
+      player.setVelocityX(200)
 
       player.anims.play('right', true)
     } else {
@@ -111,11 +116,11 @@ export default class extends Phaser.Scene {
 
     // player 2
     if (keyQ.isDown) {
-      player2.setVelocityX(-160)
+      player2.setVelocityX(-200)
 
       player2.anims.play('left', true)
     } else if (keyD.isDown) {
-      player2.setVelocityX(160)
+      player2.setVelocityX(200)
 
       player2.anims.play('right', true)
     } else {
@@ -125,6 +130,14 @@ export default class extends Phaser.Scene {
     }
     if (keyZ.isDown && player2.body.touching.down) {
       player2.setVelocityY(-230)
+    }
+
+    // ball
+
+    if (this.physics.world.collide(logo, ground)) {
+      logo.x = 450
+      logo.y = 100
+      logo.setVelocity(100, 200)
     }
   }
 }
