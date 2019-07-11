@@ -33,7 +33,6 @@ export default class extends Phaser.Scene {
   }
 
   create () {
-
   }
 
   fontsLoaded () {
