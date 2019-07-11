@@ -2,9 +2,15 @@
 import Phaser from 'phaser'
 
 let ground
+let leftSide
+let rightSide
 let logo
 let player
 let player2
+let scorePlayer = 0
+let scoreText
+let scorePlayer2Text
+let scorePlayer2 = 0
 let cursors
 let keyQ
 let keyZ
@@ -18,7 +24,7 @@ export default class extends Phaser.Scene {
 
   preload () {
     this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
-    this.load.image('ground', 'asserts/Bastest.png')
+    this.load.image('ground', 'asserts/Right-sideTransparent.png')
     this.load.image('logo', 'asserts/balls/BallTest.png')
     this.load.image('filet', 'asserts/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
@@ -28,7 +34,8 @@ export default class extends Phaser.Scene {
     this.add.image(200, 280, 'sky')
 
     ground = this.physics.add.staticGroup()
-    ground.create(200, 850, 'ground')
+    leftSide = ground.create(175, 850, 'ground')
+    rightSide = ground.create(625, 850, 'ground')
 
     const filet = this.physics.add.staticGroup()
     filet.create(400, 800, 'filet')
@@ -48,7 +55,7 @@ export default class extends Phaser.Scene {
       blendMode: 'ADD'
     })
 
-    logo = this.physics.add.sprite(450, 100, 'logo')
+    logo = this.physics.add.sprite(150, 100, 'logo')
 
     logo.body.setCircle(20)
     logo.setVelocity(100, 200)
@@ -92,10 +99,13 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(filet, player2)
     this.physics.add.collider(filet, player)
     this.physics.add.collider(filet, logo)
+
+    scoreText = this.add.text(25, 50, scorePlayer)
+    scorePlayer2Text = this.add.text(700, 50, scorePlayer2)
   }
 
   update () {
-    // player
+    // player controls
     if (cursors.left.isDown) {
       player.setVelocityX(-200)
 
@@ -114,7 +124,7 @@ export default class extends Phaser.Scene {
       player.setVelocityY(-230)
     }
 
-    // player 2
+    // player 2 controls
     if (keyQ.isDown) {
       player2.setVelocityX(-200)
 
@@ -132,12 +142,21 @@ export default class extends Phaser.Scene {
       player2.setVelocityY(-230)
     }
 
-    // ball
+    // ball reset & score handling
 
-    if (this.physics.world.collide(logo, ground)) {
+    if (this.physics.world.collide(logo, rightSide)) {
       logo.x = 450
       logo.y = 100
       logo.setVelocity(100, 200)
+      scorePlayer += 1
+      scoreText.setText(`Score : ${scorePlayer}`)
+    }
+    if (this.physics.world.collide(logo, leftSide)) {
+      logo.x = 450
+      logo.y = 100
+      logo.setVelocity(100, 200)
+      scorePlayer2 += 1
+      scorePlayer2Text.setText(`Score : ${scorePlayer2}`)
     }
   }
 }
