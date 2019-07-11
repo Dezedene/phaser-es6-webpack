@@ -15,30 +15,21 @@ export default class extends Phaser.Scene {
   init () {}
 
   preload () {
-    this.load.image('white', 'asserts/White-Background.png')
-    this.load.image('back', 'asserts/Pionk.png')
     this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
-    this.load.image('ground', 'src/assert/decor/translucent_floor.png')
+    this.load.image('ground', 'asserts/Bastest.png')
     this.load.image('logo', 'asserts/balls/volleyball.png')
-    this.load.image('filet', 'asserts/set/set.png')
+    this.load.image('filet', 'asserts/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
   }
 
   create () {
-    this.add.image(900, 480, 'sky').setScale(2)
+    this.add.image(200, 280, 'sky')
 
     const ground = this.physics.add.staticGroup()
-    ground.create(1060, 1300, 'ground')
+    ground.create(200, 850, 'ground')
 
     const filet = this.physics.add.staticGroup()
-    filet.create(1070, 1300, 'filet')
-
-    const particles = this.add.particles('red')
-
-    const platforms = this.physics.add.staticGroup()
-
-    platforms.create(400, 500, 'ground')
-    platforms.create(800, 1168, 'back').setScale(3).refreshBody()
+    filet.create(400, 800, 'filet')
 
     player = this.physics.add.sprite(700, 150, 'dude')
     player2 = this.physics.add.sprite(100, 150, 'dude')
@@ -48,6 +39,7 @@ export default class extends Phaser.Scene {
     player2.setBounce(0.2)
     player2.setCollideWorldBounds(true)
 
+    const particles = this.add.particles('red')
     const emitter = particles.createEmitter({
       speed: 100,
       scale: { start: 1, end: 0 },
@@ -60,7 +52,8 @@ export default class extends Phaser.Scene {
     logo.setBounce(1, 1)
     logo.setCollideWorldBounds(true)
     this.physics.add.collider(logo, ground)
-    this.physics.add.collider(logo, filet)
+    this.physics.add.collider(logo, player)
+    this.physics.add.collider(logo, player2)
 
     emitter.startFollow(logo)
 
@@ -89,8 +82,12 @@ export default class extends Phaser.Scene {
     keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z)
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
 
-    this.physics.add.collider(player, platforms)
-    this.physics.add.collider(player2, platforms)
+    this.physics.add.collider(player, ground)
+    this.physics.add.collider(player2, ground)
+
+    this.physics.add.collider(filet, player2)
+    this.physics.add.collider(filet, player)
+    this.physics.add.collider(filet, logo)
   }
 
   update () {
