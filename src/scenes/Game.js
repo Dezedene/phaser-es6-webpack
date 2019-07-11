@@ -15,15 +15,15 @@ export default class extends Phaser.Scene {
   init () {}
 
   preload () {
-    this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
+    this.load.image('background', 'asserts/backgrounds/volcano-game-background-5.jpg')
     this.load.image('ground', 'asserts/Bastest.png')
-    this.load.image('logo', 'asserts/balls/volleyball.png')
+    this.load.image('ball', 'asserts/balls/volleyball.png')
     this.load.image('filet', 'asserts/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
   }
 
   create () {
-    this.add.image(200, 280, 'sky')
+    this.add.image(200, 280, 'background')
 
     const ground = this.physics.add.staticGroup()
     ground.create(200, 850, 'ground')
@@ -33,6 +33,9 @@ export default class extends Phaser.Scene {
 
     player = this.physics.add.sprite(700, 150, 'dude')
     player2 = this.physics.add.sprite(100, 150, 'dude')
+
+    player.body.setGravityY(60)
+    player2.body.setGravity(60)
 
     player.setBounce(0.2)
     player.setCollideWorldBounds(true)
@@ -46,16 +49,16 @@ export default class extends Phaser.Scene {
       blendMode: 'ADD'
     })
 
-    const logo = this.physics.add.image(400, 100, 'logo')
+    const ball = this.physics.add.image(400, 100, 'ball')
 
-    logo.setVelocity(100, 200)
-    logo.setBounce(1, 1)
-    logo.setCollideWorldBounds(true)
-    this.physics.add.collider(logo, ground)
-    this.physics.add.collider(logo, player)
-    this.physics.add.collider(logo, player2)
+    ball.setVelocity(100, 200)
+    ball.setBounce(1, 1)
+    ball.setCollideWorldBounds(true)
+    this.physics.add.collider(ball, ground)
+    this.physics.add.collider(ball, player)
+    this.physics.add.collider(ball, player2)
 
-    emitter.startFollow(logo)
+    emitter.startFollow(ball)
 
     this.anims.create({
       key: 'left',
@@ -87,7 +90,7 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(filet, player2)
     this.physics.add.collider(filet, player)
-    this.physics.add.collider(filet, logo)
+    this.physics.add.collider(filet, ball)
   }
 
   update () {
