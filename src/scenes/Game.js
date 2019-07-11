@@ -24,9 +24,9 @@ export default class extends Phaser.Scene {
 
   preload () {
     this.load.image('background', 'asserts/backgrounds/volcano-game-background-5.jpg')
-    this.load.image('ground', 'asserts/Right-sideTransparent.png')
+    this.load.image('ground', 'asserts/various/Right-sideTransparent.png')
     this.load.image('ball', 'asserts/balls/BallTest.png')
-    this.load.image('filet', 'asserts/Rectangle2.png')
+    this.load.image('filet', 'asserts/various/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
   }
 
