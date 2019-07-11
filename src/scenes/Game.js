@@ -7,6 +7,7 @@ let cursors
 let keyQ
 let keyZ
 let keyD
+let ball
 
 export default class extends Phaser.Scene {
   constructor () {
@@ -49,10 +50,11 @@ export default class extends Phaser.Scene {
       blendMode: 'ADD'
     })
 
-    const ball = this.physics.add.image(400, 100, 'ball')
+    ball = this.physics.add.image(400, 100, 'ball')
 
+    ball.setDrag(5, 5)
     ball.setVelocity(100, 200)
-    ball.setBounce(1, 1)
+    ball.setBounce(0.95, 0.95)
     ball.setCollideWorldBounds(true)
     this.physics.add.collider(ball, ground)
     this.physics.add.collider(ball, player)
