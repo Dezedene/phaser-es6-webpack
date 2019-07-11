@@ -13,7 +13,7 @@ export default class extends Phaser.Scene {
   preload () {
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
-    this.add.text(100, 100, 'loading fonts...')
+    this.add.text(100, 100, 'loading Game...')
 
     WebFont.load({
       google: {
@@ -53,7 +53,7 @@ export default class extends Phaser.Scene {
     this.load.on('progress', (percent) => {
       loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50)
       console.log(percent)
-    }) 
+    })
   }
 
   create () {
@@ -62,7 +62,7 @@ export default class extends Phaser.Scene {
 
   update () {
     if (this.fontsReady) {
-      this.scene.start('MenuScene', 'hello from LoadScene')
+      this.scene.start('MenuScene')
       this.scene.launch()
     }
   }
