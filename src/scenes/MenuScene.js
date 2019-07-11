@@ -2,14 +2,18 @@ import Phaser from 'phaser'
 
 export default class extends Phaser.Scene {
   constructor () {
-    super({ key: 'SplashScene' })
+    super({ key: 'MenuScene' })
+  }
+
+  init (data) {
+    console.log(data)
+    console.log('I got it')
   }
 
   preload () {
     //
     // load your assets
     //
-    this.load.image('mushroom', 'assets/images/mushroom2.png')
   }
 
   create () {

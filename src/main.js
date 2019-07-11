@@ -1,13 +1,11 @@
 import Phaser from 'phaser'
-
-import BootScene from './scenes/Boot'
-import SplashScene from './scenes/Splash'
+import BootScene from './scenes/LoadScene'
+import MenuScene from './scenes/MenuScene'
 import GameScene from './scenes/Game'
-
 import config from './config'
 
 const gameConfig = Object.assign(config, {
-  scene: [BootScene, SplashScene, GameScene]
+  scene: [BootScene, MenuScene, GameScene]
 })
 
 class Game extends Phaser.Game {
