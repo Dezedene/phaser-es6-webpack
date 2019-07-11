@@ -39,13 +39,21 @@ export default class extends Phaser.Scene {
 
     let loadingBar = this.add.graphics({
       fillStyle: {
-        color: 0xE29224
+        color: 0x44E224
       }
     })
 
+    for (let i = 0; i < 100; i++) {
+      this.load.spritesheet('logo' + i, 'asserts/various/logo.png', {
+        frameHeight: 32,
+        frameWidth: 32
+      })
+    }
+
     this.load.on('progress', (percent) => {
+      loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50)
       console.log(percent)
-    })
+    }) 
   }
 
   create () {
