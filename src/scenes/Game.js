@@ -16,13 +16,24 @@ export default class extends Phaser.Scene {
 
   preload () {
     this.load.image('white', 'asserts/White-Background.png')
-    this.load.image('ground', 'asserts/Rectangle.png')
     this.load.image('back', 'asserts/Pionk.png')
+    this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
+    this.load.image('ground', 'src/assert/decor/translucent_floor.png')
+    this.load.image('logo', 'asserts/balls/volleyball.png')
+    this.load.image('filet', 'asserts/set/set.png')
     this.load.spritesheet('dude', 'asserts/characters/dude.png', { frameWidth: 32, frameHeight: 48 })
   }
 
   create () {
-    this.add.image(400, 300, 'white')
+    this.add.image(900, 480, 'sky').setScale(2)
+
+    const ground = this.physics.add.staticGroup()
+    ground.create(1060, 1300, 'ground')
+
+    const filet = this.physics.add.staticGroup()
+    filet.create(1070, 1300, 'filet')
+
+    const particles = this.add.particles('red')
 
     const platforms = this.physics.add.staticGroup()
 
@@ -36,6 +47,22 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true)
     player2.setBounce(0.2)
     player2.setCollideWorldBounds(true)
+
+    const emitter = particles.createEmitter({
+      speed: 100,
+      scale: { start: 1, end: 0 },
+      blendMode: 'ADD'
+    })
+
+    const logo = this.physics.add.image(400, 100, 'logo')
+
+    logo.setVelocity(100, 200)
+    logo.setBounce(1, 1)
+    logo.setCollideWorldBounds(true)
+    this.physics.add.collider(logo, ground)
+    this.physics.add.collider(logo, filet)
+
+    emitter.startFollow(logo)
 
     this.anims.create({
       key: 'left',
