@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack",
-    "deploy": "npm install"
+    "deploy": ""
   },
   "license": "MIT",
   "devDependencies": {
