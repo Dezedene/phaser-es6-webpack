@@ -26,13 +26,11 @@ export default class extends Phaser.Scene {
   }
 
   create () {
-    this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.25, 'title').setDepth(1).setScale(1.7)
-
     this.add.image(0, 0, 'title_bg').setOrigin(0).setDepth(0)
 
     const soundInstruction = {
-      x: this.game.renderer.width / 3.50,
-      y: this.game.renderer.height * 0.57,
+      x: 260,
+      y: 120,
       text: 'Sound:',
       style: {
         fontSize: '35px',
@@ -41,9 +39,10 @@ export default class extends Phaser.Scene {
         align: 'center',
         lineSpacing: 44
       } }
+
     var loadingConf = {
-      x: 280,
-      y: 390,
+      x: 260,
+      y: 200,
       text: 'Player 1 pick a player to play with',
       style: {
         fontSize: '25px',
@@ -55,9 +54,23 @@ export default class extends Phaser.Scene {
 
     pickPlayerText = this.make.text(loadingConf)
 
+    var loadingConf2 = {
+      x: 260,
+      y: 300,
+      text: 'Player 2 pick a player to play with',
+      style: {
+        fontSize: '25px',
+        fontFamily: 'Bangers',
+        color: '#ffffff',
+        align: 'center',
+        lineSpacing: 44
+      } }
+
+    pickPlayerText = this.make.text(loadingConf2)
+
     var ballConf = {
-      x: 280,
-      y: 480,
+      x: 310,
+      y: 400,
       text: 'Pick a ball to play with',
       style: {
         fontSize: '25px',
@@ -69,9 +82,9 @@ export default class extends Phaser.Scene {
 
     var balls = this.make.text(ballConf)
 
-    let ball = this.add.image(200, 550, 'ball')
-    let boule = this.add.image(400, 550, 'boule')
-    let beach = this.add.image(600, 550, 'beach')
+    let ball = this.add.image(200, 470, 'ball')
+    let boule = this.add.image(400, 470, 'boule')
+    let beach = this.add.image(600, 470, 'beach')
 
     this.make.text(soundInstruction)
 
@@ -90,15 +103,19 @@ export default class extends Phaser.Scene {
 
     this.make.text(backInstruction)
 
-    let soundOnButton = this.add.image(350, 350, 'soundOnButton').setDepth(1)
+    let soundOnButton = this.add.image(400, 140, 'soundOnButton').setDepth(1)
 
-    let soundOffButton = this.add.image(450, 350, 'soundOffButton').setDepth(1)
+    let soundOffButton = this.add.image(500, 140, 'soundOffButton').setDepth(1)
 
     let backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.9, 'backButton').setDepth(1)
 
-    let lapin = this.add.image(200, 450, 'lapin')
-    let mario = this.add.image(400, 450, 'mario')
-    let flower = this.add.image(600, 450, 'flower')
+    let lapin = this.add.image(200, 260, 'lapin')
+    let mario = this.add.image(400, 260, 'mario')
+    let flower = this.add.image(600, 260, 'flower')
+
+    let lapinP2 = this.add.image(200, 360, 'lapin')
+    let marioP2 = this.add.image(400, 360, 'mario')
+    let flowerP2 = this.add.image(600, 360, 'flower')
 
     soundOnButton.setInteractive()
     soundOffButton.setInteractive()
@@ -111,6 +128,10 @@ export default class extends Phaser.Scene {
     lapin.setInteractive()
     mario.setInteractive()
     flower.setInteractive()
+
+    lapinP2.setInteractive()
+    marioP2.setInteractive()
+    flowerP2.setInteractive()
 
     soundOnButton.on('pointerup', () => {
       sound = true
