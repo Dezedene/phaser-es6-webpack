@@ -21,6 +21,7 @@ let keyD
 let Seb
 let loser
 let time = 60
+let ballTime = 3
 let timer
 let timedEvent
 let halfTime
@@ -215,6 +216,16 @@ export default class extends Phaser.Scene {
       } }
     pictureAppear = this.make.text(pictureAppearConf)
     pictureAppear.visible = false
+
+    const waitBall = () => {
+      ballTime--
+    }
+    timedEvent = this.time.addEvent({
+      delay: 1000,
+      callback: waitBall,
+      callbackScope: this,
+      loop: true
+    })
   }
 
   update () {
@@ -262,17 +273,19 @@ export default class extends Phaser.Scene {
 
     if (this.physics.world.collide(logo, rightSide)) {
       logo.x = 550
-      logo.y = 300
+      logo.y = 200
       logo.setVelocity(logoAccelerationX, logoAccelerationY)
       scorePlayer += 1
       scoreText.setText(`Score : ${scorePlayer}`)
+      ballTime = 3
     }
     if (this.physics.world.collide(logo, leftSide)) {
       logo.x = 150
-      logo.y = 300
+      logo.y = 200
       logo.setVelocity(logoAccelerationX, logoAccelerationY)
       scorePlayer2 += 1
       scorePlayer2Text.setText(`Score : ${scorePlayer2}`)
+      ballTime = 3
     }
 
     if (this.physics.world.collide(Seb, rightSide)) {
