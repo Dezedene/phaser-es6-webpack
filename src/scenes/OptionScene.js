@@ -2,8 +2,10 @@ import Phaser from 'phaser'
 
 let sound = true
 let pickPlayerText
+let pickPlayer2Text
 let ballChoosen
 let playersChoosen = []
+let balls
 
 export default class extends Phaser.Scene {
   constructor () {
@@ -66,7 +68,7 @@ export default class extends Phaser.Scene {
         lineSpacing: 44
       } }
 
-    pickPlayerText = this.make.text(loadingConf2)
+    pickPlayer2Text = this.make.text(loadingConf2)
 
     var ballConf = {
       x: 310,
@@ -80,7 +82,7 @@ export default class extends Phaser.Scene {
         lineSpacing: 44
       } }
 
-    var balls = this.make.text(ballConf)
+    balls = this.make.text(ballConf)
 
     let ball = this.add.image(200, 470, 'ball')
     let boule = this.add.image(400, 470, 'boule')
@@ -147,18 +149,36 @@ export default class extends Phaser.Scene {
       }
     })
     lapin.on('pointerup', () => {
-      if (playersChoosen.length < 2) {
+      if (playersChoosen.length < 1) {
         playersChoosen = [...playersChoosen, 'lapin']
       }
     })
 
     mario.on('pointerup', () => {
-      if (playersChoosen.length < 2) {
+      if (playersChoosen.length < 1) {
         playersChoosen = [...playersChoosen, 'mario']
       }
     })
 
     flower.on('pointerup', () => {
+      if (playersChoosen.length < 1) {
+        playersChoosen = [...playersChoosen, 'flower']
+      }
+    })
+
+    lapinP2.on('pointerup', () => {
+      if (playersChoosen.length < 2) {
+        playersChoosen = [...playersChoosen, 'lapin']
+      }
+    })
+
+    marioP2.on('pointerup', () => {
+      if (playersChoosen.length < 2) {
+        playersChoosen = [...playersChoosen, 'mario']
+      }
+    })
+
+    flowerP2.on('pointerup', () => {
       if (playersChoosen.length < 2) {
         playersChoosen = [...playersChoosen, 'flower']
       }
@@ -179,10 +199,13 @@ export default class extends Phaser.Scene {
 
   update () {
     if (playersChoosen.length === 1) {
-      pickPlayerText.setText('Player 2 pick a player to play with')
+      pickPlayerText.setText(`Player one picked ${playersChoosen[0]}`)
     }
     if (playersChoosen.length === 2) {
-      pickPlayerText.setText(`Player 1 has choose ${playersChoosen[0]} & Player 2 has choose ${playersChoosen[1]}`)
+      pickPlayer2Text.setText(`Player two picked ${playersChoosen[1]}`)
+    }
+    if (ballChoosen !== undefined) {
+      balls.setText(`You picked the ${ballChoosen}`)
     }
   }
 }
