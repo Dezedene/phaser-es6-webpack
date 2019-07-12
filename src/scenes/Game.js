@@ -63,7 +63,7 @@ export default class extends Phaser.Scene {
     this.load.image('ball', 'asserts/balls/BallTest.png')
     this.load.image('boule', 'asserts/balls/FootBall.png')
     this.load.image('beach', 'asserts/balls/BeachBall.png')
-    this.load.image('filet', 'asserts/various/Rectangle2.png')
+    this.load.image('filet', 'asserts/various/volley-net.png')
     this.load.spritesheet('lapin', 'asserts/characters/Lapin.png', { frameWidth: 40, frameHeight: 40 })
     this.load.spritesheet('mario', 'asserts/characters/Mario.png', { frameWidth: 40, frameHeight: 40 })
     this.load.spritesheet('flower', 'asserts/characters/Flower.png', { frameWidth: 40, frameHeight: 40 })
@@ -90,7 +90,7 @@ export default class extends Phaser.Scene {
     rightSide = ground.create(625, 850, 'ground')
 
     const filet = this.physics.add.staticGroup()
-    filet.create(400, 800, 'filet')
+    filet.create(405, 480, 'filet')
 
     player = this.physics.add.sprite(100, 350, player1Character || defaultPlayer1)
     player2 = this.physics.add.sprite(700, 350, player2Character || defaultPlayer2)
