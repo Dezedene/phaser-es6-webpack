@@ -12,5 +12,9 @@ export default {
       debug: false
     }
   },
-  localStorageName: 'phaseres6webpack'
+  localStorageName: 'phaseres6webpack',
+
+  render: {
+    pixelArt: true
+  }
 }
