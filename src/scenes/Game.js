@@ -7,7 +7,7 @@ let rightSide
 let logo
 let logoAccelerationX = 100
 let logoAccelerationY = 100
-let ball
+let ball = 'beach'
 let player
 let player2
 let scorePlayer = 0
@@ -42,6 +42,8 @@ export default class extends Phaser.Scene {
     this.load.image('background', 'asserts/backgrounds/volcano-game-background-5.jpg')
     this.load.image('ground', 'asserts/various/Right-sideTransparent.png')
     this.load.image('ball', 'asserts/balls/BallTest.png')
+    this.load.image('boule', 'asserts/balls/FootBall.png')
+    this.load.image('beach', 'asserts/balls/BeachBall.png')
     this.load.image('filet', 'asserts/various/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/Lapin.png', { frameWidth: 40, frameHeight: 40 })
 
@@ -71,14 +73,14 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true)
     player2.setCollideWorldBounds(true)
 
-    const particles = this.add.particles('ball')
+    const particles = this.add.particles(ball)
     const emitter = particles.createEmitter({
       speed: { start: 10, end: 90 },
       scale: { start: 1, end: 0 },
       blendMode: 'ADD'
     })
 
-    logo = this.physics.add.image(150, 100, 'ball')
+    logo = this.physics.add.image(150, 100, ball)
 
     logo.body.setCircle(20)
     logo.setVelocity(logoAccelerationX, logoAccelerationY)

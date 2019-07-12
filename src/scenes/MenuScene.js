@@ -1,5 +1,7 @@
 import Phaser from 'phaser'
 
+let music
+
 export default class extends Phaser.Scene {
   constructor () {
     super({ key: 'MenuScene' })
@@ -12,6 +14,7 @@ export default class extends Phaser.Scene {
     //
     // load your assets
     //
+    music = this.sound.add('title_music')
   }
 
   create () {
@@ -23,7 +26,7 @@ export default class extends Phaser.Scene {
 
     let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.65 + 100, 'option_button').setDepth(1)
 
-    this.sound.play('title_music')
+    music.play()
 
     let hoverSprite = this.add.sprite(120, 120, 'logo')
     hoverSprite.setScale(0.30)
@@ -51,6 +54,7 @@ export default class extends Phaser.Scene {
 
     playButton.on('pointerup', () => {
       this.scene.start('GameScene')
+      music.stop()
     })
 
     optionButton.on('pointerup', () => {
