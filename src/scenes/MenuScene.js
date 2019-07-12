@@ -58,5 +58,6 @@ export default class extends Phaser.Scene {
     })
   }
 
-  update () {}
+  update () {
+  }
 }

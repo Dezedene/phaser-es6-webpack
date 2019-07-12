@@ -26,9 +26,9 @@ export default class extends Phaser.Scene {
 
     this.load.image('title', 'asserts/various/headhunter.png')
 
-    this.load.image('start_button', 'asserts/various/start.png')
+    this.load.image('start_button', 'asserts/buttons/start.png')
 
-    this.load.image('option_button', 'asserts/various/option.png')
+    this.load.image('option_button', 'asserts/buttons/option.png')
 
     this.load.image('logo', 'asserts/various/nyanlogo.png')
 
@@ -54,7 +54,6 @@ export default class extends Phaser.Scene {
 
     this.load.on('progress', (percent) => {
       loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50)
-      console.log(percent)
     })
   }
 

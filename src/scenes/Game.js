@@ -19,7 +19,6 @@ let keyQ
 let keyZ
 let keyD
 let Seb
-
 let loser
 let time = 60
 let timer
