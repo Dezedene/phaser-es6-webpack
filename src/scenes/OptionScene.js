@@ -82,9 +82,9 @@ export default class extends Phaser.Scene {
 
     var balls = this.make.text(ballConf)
 
-    let ball = this.add.image(200, 425, 'ball')
-    let boule = this.add.image(400, 425, 'boule')
-    let beach = this.add.image(600, 425, 'beach')
+    let ball = this.add.image(200, 430, 'ball')
+    let boule = this.add.image(400, 430, 'boule')
+    let beach = this.add.image(600, 430, 'beach')
 
     this.make.text(soundInstruction)
 
