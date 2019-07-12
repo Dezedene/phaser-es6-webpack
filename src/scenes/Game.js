@@ -26,6 +26,8 @@ let timedEvent
 let halfTime
 let pictureAppear
 
+let music
+
 let dynamic
 
 export default class extends Phaser.Scene {
@@ -35,6 +37,7 @@ export default class extends Phaser.Scene {
   init () {}
 
   preload () {
+    music = this.sound.add('game_music')
     time = 40
     scorePlayer = 0
     scorePlayer2 = 0
@@ -51,6 +54,8 @@ export default class extends Phaser.Scene {
   }
 
   create () {
+    music.play()
+
     this.add.image(200, 280, 'background')
     dynamic = this.physics.add.group()
     Seb = dynamic.create(400, -100, 'Seb')
@@ -215,6 +220,7 @@ export default class extends Phaser.Scene {
       } else {
         loser = 'Player 2'
       }
+      music.stop()
       this.scene.start('EndingScene', loser)
     }
   }

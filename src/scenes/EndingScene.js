@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import WebFont from 'webfontloader'
 
 let loser
+let music
 
 export default class extends Phaser.Scene {
   constructor () {
@@ -13,6 +14,8 @@ export default class extends Phaser.Scene {
   }
 
   preload () {
+    music = this.sound.add('gameOver_music')
+
     this.load.image('Gif', 'asserts/various/BackgroundEnd.jpg.jpg')
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -28,6 +31,7 @@ export default class extends Phaser.Scene {
   create () {
     this.fontsLoaded()
     if (this.fontsReady) {
+      music.play()
       const background = this.add.image(0, 0, 'Gif').setDepth(0)
       background.setOrigin(0, 0)
 
@@ -77,6 +81,7 @@ export default class extends Phaser.Scene {
 
       tryGain.on('pointerup', () => {
         this.scene.start('LoadScene')
+        music.stop()
       })
     }
   }

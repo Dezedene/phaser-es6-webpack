@@ -37,7 +37,9 @@ export default class extends Phaser.Scene {
       frameWidth: 32
     })
 
-    this.load.audio('title_music', 'asserts/musics/Boss Fight.ogg')
+    this.load.audio('title_music', 'asserts/musics/New Hope.ogg')
+    this.load.audio('game_music', 'asserts/musics/Boss Fight.ogg')
+    this.load.audio('gameOver_music', 'asserts/musics/Game Over.ogg')
 
     let loadingBar = this.add.graphics({
       fillStyle: {
