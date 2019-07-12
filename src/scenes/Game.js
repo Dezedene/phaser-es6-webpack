@@ -30,6 +30,8 @@ let music
 let ballChoosen
 let sound
 
+let heads = []
+
 let defaultPlayer1 = 'mario'
 let defaultPlayer2 = 'flower'
 let player1Character
@@ -52,7 +54,7 @@ export default class extends Phaser.Scene {
 
   preload () {
     music = this.sound.add('game_music')
-    time = 40
+    time = 25
     scorePlayer = 0
     scorePlayer2 = 0
 
@@ -67,14 +69,20 @@ export default class extends Phaser.Scene {
     this.load.spritesheet('flower', 'asserts/characters/Flower.png', { frameWidth: 40, frameHeight: 40 })
 
     this.load.image('Seb', 'asserts/characters/Seb.png')
+    this.load.image('Matthieu', 'asserts/characters/Matthieu.png')
+    this.load.image('Etienne', 'asserts/characters/Etienne.png')
+    this.load.image('ClémentB', 'asserts/characters/ClémentB.png')
+    this.load.image('Thomas', 'asserts/characters/Thomas.png')
+    heads.push('Seb', 'Matthieu', 'Etienne', 'ClémentB', 'Thomas')
   }
 
   create () {
+    var show = heads[Math.floor(Math.random() * heads.length)]
     music.play()
 
     this.add.image(200, 280, 'background')
     dynamic = this.physics.add.group()
-    Seb = dynamic.create(400, -100, 'Seb')
+    Seb = dynamic.create(400, -100, show)
     Seb.body.setAllowGravity(false)
 
     ground = this.physics.add.staticGroup()

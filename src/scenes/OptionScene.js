@@ -76,9 +76,9 @@ export default class extends Phaser.Scene {
     this.make.text(soundInstruction)
 
     const backInstruction = {
-      x: this.game.renderer.width / 3.50,
-      y: this.game.renderer.height * 0.86,
-      text: 'Main menu:',
+      x: 150,
+      y: 510,
+      text: 'Start the game :',
       style: {
         fontSize: '35px',
         fontFamily: 'Bangers',
@@ -121,7 +121,9 @@ export default class extends Phaser.Scene {
     })
 
     backButton.on('pointerup', () => {
-      this.scene.start('MenuScene')
+      if (playersChoosen.length === 2) {
+        this.scene.start('GameScene', [ballChoosen, sound, playersChoosen])
+      }
     })
     lapin.on('pointerup', () => {
       if (playersChoosen.length < 2) {
@@ -139,28 +141,18 @@ export default class extends Phaser.Scene {
       if (playersChoosen.length < 2) {
         playersChoosen = [...playersChoosen, 'flower']
       }
-      console.log(playersChoosen)
     })
 
     ball.on('pointerup', () => {
       ballChoosen = 'ball'
-      if (playersChoosen.length === 2) {
-        this.scene.start('GameScene', [ballChoosen, sound, playersChoosen])
-      }
     })
 
     boule.on('pointerup', () => {
       ballChoosen = 'boule'
-      if (playersChoosen.length === 2) {
-        this.scene.start('GameScene', [ballChoosen, sound, playersChoosen])
-      }
     })
 
     beach.on('pointerup', () => {
       ballChoosen = 'beach'
-      if (playersChoosen.length === 2) {
-        this.scene.start('GameScene', [ballChoosen, sound, playersChoosen])
-      }
     })
   }
 
