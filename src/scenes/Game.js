@@ -27,6 +27,13 @@ let halfTime
 let pictureAppear
 
 let music
+let ballChoosen
+let sound
+
+let defaultPlayer1 = 'mario'
+let defaultPlayer2 = 'flower'
+let player1Character
+let player2Character
 
 let dynamic
 
@@ -34,7 +41,14 @@ export default class extends Phaser.Scene {
   constructor () {
     super({ key: 'GameScene' })
   }
-  init () {}
+  init (data) {
+    if (Object.keys(data).length) {
+      ballChoosen = data[0]
+      sound = data[1]
+      player1Character = data[2][0]
+      player2Character = data[2][1]
+    }
+  }
 
   preload () {
     music = this.sound.add('game_music')
@@ -48,7 +62,9 @@ export default class extends Phaser.Scene {
     this.load.image('boule', 'asserts/balls/FootBall.png')
     this.load.image('beach', 'asserts/balls/BeachBall.png')
     this.load.image('filet', 'asserts/various/Rectangle2.png')
-    this.load.spritesheet('dude', 'asserts/characters/Lapin.png', { frameWidth: 40, frameHeight: 40 })
+    this.load.spritesheet('lapin', 'asserts/characters/Lapin.png', { frameWidth: 40, frameHeight: 40 })
+    this.load.spritesheet('mario', 'asserts/characters/Mario.png', { frameWidth: 40, frameHeight: 40 })
+    this.load.spritesheet('flower', 'asserts/characters/Flower.png', { frameWidth: 40, frameHeight: 40 })
 
     this.load.image('Seb', 'asserts/characters/Seb.png')
   }
@@ -68,8 +84,8 @@ export default class extends Phaser.Scene {
     const filet = this.physics.add.staticGroup()
     filet.create(400, 800, 'filet')
 
-    player = this.physics.add.sprite(700, 350, 'dude')
-    player2 = this.physics.add.sprite(100, 350, 'dude')
+    player = this.physics.add.sprite(100, 350, player1Character || defaultPlayer1)
+    player2 = this.physics.add.sprite(700, 350, player2Character || defaultPlayer2)
 
     player.body.setGravityY(60)
     player2.body.setGravity(60)
@@ -78,14 +94,14 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true)
     player2.setCollideWorldBounds(true)
 
-    const particles = this.add.particles(ball)
+    const particles = this.add.particles(ballChoosen || ball)
     const emitter = particles.createEmitter({
       speed: { start: 10, end: 90 },
       scale: { start: 1, end: 0 },
       blendMode: 'ADD'
     })
 
-    logo = this.physics.add.image(150, 100, ball)
+    logo = this.physics.add.image(150, 100, ballChoosen || ball)
 
     logo.body.setCircle(20)
     logo.setVelocity(logoAccelerationX, logoAccelerationY)
@@ -113,9 +129,44 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(logo, Seb)
     this.physics.add.collider(Seb, filet)
 
-    scoreText = this.add.text(25, 50, scorePlayer)
-    scorePlayer2Text = this.add.text(700, 50, scorePlayer2)
-    timer = this.add.text(400, 50, time)
+    var scoreTextConf = {
+      x: 50,
+      y: 50,
+      text: scorePlayer,
+      style: {
+        fontSize: '40px',
+        fontFamily: 'Bangers',
+        color: '#6aff00',
+        align: 'center',
+        lineSpacing: 44
+      } }
+    scoreText = this.make.text(scoreTextConf)
+
+    var scorePlayer2Conf = {
+      x: 620,
+      y: 50,
+      text: scorePlayer2,
+      style: {
+        fontSize: '40px',
+        fontFamily: 'Bangers',
+        color: '#6aff00',
+        align: 'center',
+        lineSpacing: 44
+      } }
+    scorePlayer2Text = this.make.text(scorePlayer2Conf)
+
+    var timerConf = {
+      x: 400,
+      y: 50,
+      text: time,
+      style: {
+        fontSize: '30px',
+        fontFamily: 'Bangers',
+        color: '#f46464',
+        align: 'center',
+        lineSpacing: 44
+      } }
+    timer = this.make.text(timerConf)
 
     const onEvent = () => {
       time--
@@ -127,10 +178,34 @@ export default class extends Phaser.Scene {
       callbackScope: this,
       loop: true
     })
-    halfTime = this.add.text(400, 100, '30 seconds left !')
+
+    var halfTimeConf = {
+      x: 300,
+      y: 100,
+      text: '30 seconds left ! ',
+      style: {
+        fontSize: '30px',
+        fontFamily: 'Bangers',
+        color: '#6aff00',
+        align: 'center',
+        lineSpacing: 44
+      } }
+    halfTime = this.make.text(halfTimeConf)
+
     halfTime.visible = false
 
-    pictureAppear = this.add.text(300, 100, '20 more seconds, hit him to gain 10 points !')
+    var pictureAppearConf = {
+      x: 200,
+      y: 100,
+      text: '20 more seconds, hit him to gain 10 points ! ',
+      style: {
+        fontSize: '30px',
+        fontFamily: 'Bangers',
+        color: '#6aff00',
+        align: 'center',
+        lineSpacing: 44
+      } }
+    pictureAppear = this.make.text(pictureAppearConf)
     pictureAppear.visible = false
   }
 
@@ -152,27 +227,27 @@ export default class extends Phaser.Scene {
     }
     // player controls
     if (cursors.left.isDown) {
-      player.setVelocityX(-200)
-    } else if (cursors.right.isDown) {
-      player.setVelocityX(200)
-    } else {
-      player.setVelocityX(0)
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-      player.setVelocityY(-230)
-    }
-
-    // player 2 controls
-    if (keyQ.isDown) {
       player2.setVelocityX(-200)
-    } else if (keyD.isDown) {
+    } else if (cursors.right.isDown) {
       player2.setVelocityX(200)
     } else {
       player2.setVelocityX(0)
     }
-    if (keyZ.isDown && player2.body.touching.down) {
+
+    if (cursors.up.isDown && player2.body.touching.down) {
       player2.setVelocityY(-230)
+    }
+
+    // player 2 controls
+    if (keyQ.isDown) {
+      player.setVelocityX(-200)
+    } else if (keyD.isDown) {
+      player.setVelocityX(200)
+    } else {
+      player.setVelocityX(0)
+    }
+    if (keyZ.isDown && player.body.touching.down) {
+      player.setVelocityY(-230)
     }
 
     // ball reset & score handling
@@ -221,7 +296,11 @@ export default class extends Phaser.Scene {
         loser = 'Player 2'
       }
       music.stop()
-      this.scene.start('EndingScene', loser)
+      this.scene.start('EndingScene', [loser, sound])
+    }
+
+    if (sound === false) {
+      music.stop()
     }
   }
 }
