@@ -52,6 +52,10 @@ export default class extends Phaser.Scene {
     playButton.on('pointerup', () => {
       this.scene.start('GameScene')
     })
+
+    optionButton.on('pointerup', () => {
+      this.scene.start('OptionScene')
+    })
   }
 
   update () {}
