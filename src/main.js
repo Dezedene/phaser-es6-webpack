@@ -1,29 +1,18 @@
-import 'pixi'
-import 'p2'
 import Phaser from 'phaser'
-
-import BootState from './states/Boot'
-import SplashState from './states/Splash'
-import GameState from './states/Game'
-
+import LoadScene from './scenes/LoadScene'
+import MenuScene from './scenes/MenuScene'
+import OptionScene from './scenes/OptionScene'
+import GameScene from './scenes/Game'
+import EndingScene from './scenes/EndingScene'
 import config from './config'
+
+const gameConfig = Object.assign(config, {
+  scene: [LoadScene, MenuScene, OptionScene, GameScene, EndingScene]
+})
 
 class Game extends Phaser.Game {
   constructor () {
-    const docElement = document.documentElement
-    const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth
-    const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight
-
-    super(width, height, Phaser.CANVAS, 'content', null)
-
-    this.state.add('Boot', BootState, false)
-    this.state.add('Splash', SplashState, false)
-    this.state.add('Game', GameState, false)
-
-    // with Cordova with need to wait that the device is ready so we will call the Boot state in another file
-    if (!window.cordova) {
-      this.state.start('Boot')
-    }
+    super(gameConfig)
   }
 }
 
