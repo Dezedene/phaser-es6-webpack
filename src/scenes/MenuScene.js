@@ -29,14 +29,14 @@ export default class extends Phaser.Scene {
     music.play()
 
     let hoverSprite = this.add.sprite(120, 120, 'logo')
-    hoverSprite.setScale(0.30)
+    hoverSprite.setScale(0.20)
     hoverSprite.setVisible(false)
 
     playButton.setInteractive()
 
     playButton.on('pointerover', () => {
       hoverSprite.setVisible(true)
-      hoverSprite.x = playButton.x - playButton.width
+      hoverSprite.x = playButton.x - playButton.width / 1.25
       hoverSprite.y = playButton.y
     })
 
@@ -44,7 +44,7 @@ export default class extends Phaser.Scene {
 
     optionButton.on('pointerover', () => {
       hoverSprite.setVisible(true)
-      hoverSprite.x = optionButton.x - optionButton.width
+      hoverSprite.x = optionButton.x - optionButton.width / 1.25
       hoverSprite.y = optionButton.y
     })
 

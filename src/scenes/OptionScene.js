@@ -23,7 +23,7 @@ export default class extends Phaser.Scene {
 
     const soundInstruction = {
       x: this.game.renderer.width / 3.50,
-      y: this.game.renderer.height * 0.61,
+      y: this.game.renderer.height * 0.57,
       text: 'Sound:',
       style: {
         fontSize: '35px',
@@ -51,9 +51,9 @@ export default class extends Phaser.Scene {
 
     this.make.text(backInstruction)
 
-    let soundOffButton = this.add.image(this.game.renderer.width / 2.20, this.game.renderer.height * 0.65, 'soundOffButton').setDepth(1)
+    let soundOffButton = this.add.image(this.game.renderer.width / 2.20, this.game.renderer.height * 0.60, 'soundOffButton').setDepth(1)
 
-    let soundOnButton = this.add.image(this.game.renderer.width / 1.85, this.game.renderer.height * 0.65, 'soundOnButton').setDepth(1)
+    let soundOnButton = this.add.image(this.game.renderer.width / 1.85, this.game.renderer.height * 0.60, 'soundOnButton').setDepth(1)
 
     let backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.9, 'backButton').setDepth(1)
 
