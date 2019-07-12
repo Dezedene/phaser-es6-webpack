@@ -35,14 +35,10 @@ export default class extends Phaser.Scene {
     })
 
     this.load.image('title_bg', 'asserts/backgrounds/volcano-game-background-5.jpg')
-
-    this.load.image('title', 'asserts/various/headhunter.png')
-
+    this.load.image('title', 'asserts/various/headHunter.png')
     this.load.image('start_button', 'asserts/buttons/start.png')
     this.load.image('option_button', 'asserts/buttons/option.png')
-
     this.load.image('logo', 'asserts/various/nyanlogo.png')
-
     this.load.spritesheet('volleyBall', 'asserts/balls/BallTest.png', {
       frameHeight: 32,
       frameWidth: 32
