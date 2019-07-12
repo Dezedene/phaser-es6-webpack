@@ -1,8 +1,5 @@
 import Phaser from 'phaser'
 
-let tst = false
-let text = 'Toto'
-
 export default class extends Phaser.Scene {
   constructor () {
     super({ key: 'MenuScene' })
@@ -24,22 +21,37 @@ export default class extends Phaser.Scene {
 
     let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.7, 'start_button').setDepth(1)
 
-    this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.7 + 100, 'option_button').setDepth(1)
+    let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.7 + 100, 'option_button').setDepth(1)
+
+    this.sound.play('title_music')
 
     let hoverSprite = this.add.sprite(120, 120, 'logo')
-    hoverSprite.setScale(0.40)
-
-    this.add.text(0, 0, text)
+    hoverSprite.setScale(0.30)
+    hoverSprite.setVisible(false)
 
     playButton.setInteractive()
+
+    playButton.on('pointerover', () => {
+      hoverSprite.setVisible(true)
+      hoverSprite.x = playButton.x - playButton.width
+      hoverSprite.y = playButton.y
+    })
+
+    optionButton.setInteractive()
+
+    optionButton.on('pointerover', () => {
+      hoverSprite.setVisible(true)
+      hoverSprite.x = optionButton.x - optionButton.width
+      hoverSprite.y = optionButton.y
+    })
+
+    playButton.on('pointerout', () => {
+      hoverSprite.setVisible(false)
+    })
 
     playButton.on('pointerup', () => {
       this.scene.start('GameScene')
     })
-
-    if (tst) {
-      this.scene.start('GameScene')
-    }
   }
 
   update () {}

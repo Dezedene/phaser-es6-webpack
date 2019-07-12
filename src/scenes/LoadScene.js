@@ -28,14 +28,14 @@ export default class extends Phaser.Scene {
 
     this.load.image('option_button', 'asserts/various/option.png')
 
-    this.load.image('logo', 'asserts/various/logo.png')
+    this.load.image('logo', 'asserts/various/nyanlogo.png')
 
     this.load.spritesheet('volleyBall', 'asserts/balls/volleyball.png', {
       frameHeight: 32,
       frameWidth: 32
     })
 
-    this.load.audio('title_music', 'asserts/musics/AlexBeroza_-_Kalte_Ohren.mp3')
+    this.load.audio('title_music', 'asserts/musics/Boss Fight.ogg')
 
     let loadingBar = this.add.graphics({
       fillStyle: {
@@ -44,7 +44,7 @@ export default class extends Phaser.Scene {
     })
 
     for (let i = 0; i < 100; i++) {
-      this.load.spritesheet('logo' + i, 'asserts/various/logo.png', {
+      this.load.spritesheet('logo' + i, 'asserts/various/nyanlogo.png', {
         frameHeight: 32,
         frameWidth: 32
       })
