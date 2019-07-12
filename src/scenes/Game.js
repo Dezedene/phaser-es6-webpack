@@ -7,6 +7,7 @@ let rightSide
 let logo
 let logoAccelerationX = 100
 let logoAccelerationY = 100
+let ball
 let player
 let player2
 let scorePlayer = 0
@@ -19,9 +20,14 @@ let keyZ
 let keyD
 let Seb
 
+let loser
 let time = 60
 let timer
 let timedEvent
+let halfTime
+let pictureAppear
+
+let dynamic
 
 export default class extends Phaser.Scene {
   constructor () {
@@ -30,20 +36,24 @@ export default class extends Phaser.Scene {
   init () {}
 
   preload () {
-    this.load.image('sky', 'asserts/backgrounds/volcano-game-background-5.jpg')
-    this.load.image('ground', 'asserts/Right-sideTransparent.png')
-    this.load.image('logo', 'asserts/balls/BallTest.png')
-    this.load.image('filet', 'asserts/Rectangle2.png')
-    this.load.image('Seb', 'asserts/characters/Seb.png')
+    time = 40
+    scorePlayer = 0
+    scorePlayer2 = 0
+
+    this.load.image('background', 'asserts/backgrounds/volcano-game-background-5.jpg')
+    this.load.image('ground', 'asserts/various/Right-sideTransparent.png')
+    this.load.image('ball', 'asserts/balls/BallTest.png')
+    this.load.image('filet', 'asserts/various/Rectangle2.png')
     this.load.spritesheet('dude', 'asserts/characters/Lapin.png', { frameWidth: 40, frameHeight: 40 })
+
+    this.load.image('Seb', 'asserts/characters/Seb.png')
   }
 
   create () {
-    this.add.image(200, 280, 'sky')
-
-    const dynamic = this.physics.add.group()
-
-    Seb = dynamic.create(400, 0, 'Seb')
+    this.add.image(200, 280, 'background')
+    dynamic = this.physics.add.group()
+    Seb = dynamic.create(400, -100, 'Seb')
+    Seb.body.setAllowGravity(false)
 
     ground = this.physics.add.staticGroup()
     leftSide = ground.create(175, 850, 'ground')
@@ -55,17 +65,21 @@ export default class extends Phaser.Scene {
     player = this.physics.add.sprite(700, 350, 'dude')
     player2 = this.physics.add.sprite(100, 350, 'dude')
 
+    player.body.setGravityY(60)
+    player2.body.setGravity(60)
+
+    player.setBounce(0.2)
     player.setCollideWorldBounds(true)
     player2.setCollideWorldBounds(true)
 
-    const particles = this.add.particles('logo')
+    const particles = this.add.particles('ball')
     const emitter = particles.createEmitter({
       speed: { start: 10, end: 90 },
       scale: { start: 1, end: 0 },
       blendMode: 'ADD'
     })
 
-    logo = this.physics.add.image(150, 100, 'logo')
+    logo = this.physics.add.image(150, 100, 'ball')
 
     logo.body.setCircle(20)
     logo.setVelocity(logoAccelerationX, logoAccelerationY)
@@ -75,7 +89,6 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(logo, player)
     this.physics.add.collider(logo, player2)
 
-    emitter.setAlpha(0.3)
     emitter.startFollow(logo)
 
     cursors = this.input.keyboard.createCursorKeys()
@@ -88,7 +101,8 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(filet, player2)
     this.physics.add.collider(filet, player)
-    this.physics.add.collider(filet, logo)
+    this.physics.add.collider(filet, ball)
+    this.physics.add.collider(logo, filet)
 
     this.physics.add.collider(logo, Seb)
     this.physics.add.collider(Seb, filet)
@@ -102,15 +116,34 @@ export default class extends Phaser.Scene {
       timer.setText(time)
     }
     timedEvent = this.time.addEvent({
-      delay: 1000, // ms
+      delay: 1000,
       callback: onEvent,
-      // args: [],
       callbackScope: this,
       loop: true
     })
+    halfTime = this.add.text(400, 100, '30 seconds left !')
+    halfTime.visible = false
+
+    pictureAppear = this.add.text(300, 100, '20 more seconds, hit him to gain 10 points !')
+    pictureAppear.visible = false
   }
 
   update () {
+    if (time < 30) {
+      halfTime.visible = true
+    }
+    if (time < 28) {
+      halfTime.visible = false
+    }
+
+    if (time < 20 && time > 18) {
+      pictureAppear.visible = true
+      Seb.body.setAllowGravity(true)
+    }
+
+    if (time < 15) {
+      pictureAppear.visible = false
+    }
     // player controls
     if (cursors.left.isDown) {
       player.setVelocityX(-200)
@@ -173,6 +206,15 @@ export default class extends Phaser.Scene {
 
     if (logo.y < 250) {
       logo.body.setAllowGravity(true)
+    }
+
+    if (time <= 0) {
+      if (scorePlayer > scorePlayer2) {
+        loser = 'Player 1'
+      } else {
+        loser = 'Player 2'
+      }
+      this.scene.start('EndingScene', loser)
     }
   }
 }
