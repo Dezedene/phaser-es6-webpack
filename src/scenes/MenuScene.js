@@ -2,12 +2,15 @@ import Phaser from 'phaser'
 
 let music
 
+let options
+
 export default class extends Phaser.Scene {
   constructor () {
     super({ key: 'MenuScene' })
   }
 
-  init () {
+  init (data) {
+    options = data
   }
 
   preload () {
@@ -18,6 +21,16 @@ export default class extends Phaser.Scene {
   }
 
   create () {
+    console.log(Object.keys(options).length)
+    if (Object.keys(options).length === 0) {
+      music.play()
+    }
+
+    if (Object.keys(options).length === 2) {
+      if (options[1] === false) {
+        music.stop()
+      }
+    }
     this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.25, 'title').setDepth(1).setScale(1.7)
 
     this.add.image(0, 0, 'title_bg').setOrigin(0).setDepth(0)
@@ -25,8 +38,6 @@ export default class extends Phaser.Scene {
     let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.65, 'start_button').setDepth(1)
 
     let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.65 + 100, 'option_button').setDepth(1)
-
-    music.play()
 
     let hoverSprite = this.add.sprite(120, 120, 'logo')
     hoverSprite.setScale(0.20)
