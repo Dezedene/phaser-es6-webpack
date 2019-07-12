@@ -26,7 +26,7 @@ let timer
 let timedEvent
 let halfTime
 let pictureAppear
-
+let winner
 let music
 let ballChoosen
 let sound
@@ -312,12 +312,12 @@ export default class extends Phaser.Scene {
 
     if (time <= 0) {
       if (scorePlayer > scorePlayer2) {
-        loser = 'Player 1'
+        winner = 'Player 1'
       } else {
-        loser = 'Player 2'
+        winner = 'Player 2'
       }
       music.stop()
-      this.scene.start('EndingScene', [loser, sound])
+      this.scene.start('EndingScene', [winner, sound])
     }
 
     if (sound === false) {

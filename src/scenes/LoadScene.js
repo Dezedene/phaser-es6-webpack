@@ -43,7 +43,7 @@ export default class extends Phaser.Scene {
 
     this.load.image('logo', 'asserts/various/nyanlogo.png')
 
-    this.load.spritesheet('volleyBall', 'asserts/balls/volleyball.png', {
+    this.load.spritesheet('volleyBall', 'asserts/balls/BallTest.png', {
       frameHeight: 32,
       frameWidth: 32
     })

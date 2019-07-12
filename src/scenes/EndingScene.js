@@ -4,6 +4,7 @@ import WebFont from 'webfontloader'
 let loser
 let music
 let sound
+let winner
 
 export default class extends Phaser.Scene {
   constructor () {
@@ -11,7 +12,7 @@ export default class extends Phaser.Scene {
   }
 
   init (data) {
-    loser = data[0]
+    winner = data[0]
     sound = data[1]
   }
 
@@ -38,11 +39,11 @@ export default class extends Phaser.Scene {
       background.setOrigin(0, 0)
 
       var tconfig = {
-        x: 280,
-        y: 200,
-        text: 'Game Over !',
+        x: 210,
+        y: 120,
+        text: 'Game  Is  Over',
         style: {
-          fontSize: '34px',
+          fontSize: '50px',
           fontFamily: 'Monoton',
           color: '#ffffff',
           align: 'center',
@@ -51,23 +52,23 @@ export default class extends Phaser.Scene {
       }
       var text = this.make.text(tconfig)
 
-      var losertext = {
-        x: 265,
-        y: 300,
-        text: loser,
+      var winnertext = {
+        x: 105,
+        y: 220,
+        text: `${winner}  Won  The  Game !`,
         style: {
-          fontSize: '54px',
+          fontSize: '45px',
           fontFamily: 'Monoton',
           color: '#b7007a',
           align: 'center',
           lineSpacing: 44
         } }
 
-      var tryGain = this.make.text(losertext)
+      var tryGain = this.make.text(winnertext)
 
       var tryAgaintext = {
         x: 250,
-        y: 500,
+        y: 450,
         text: 'Try again',
         style: {
           fontSize: '54px',
