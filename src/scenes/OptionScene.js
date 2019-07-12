@@ -30,7 +30,7 @@ export default class extends Phaser.Scene {
 
     const soundInstruction = {
       x: 260,
-      y: 120,
+      y: 70,
       text: 'Sound:',
       style: {
         fontSize: '35px',
@@ -42,7 +42,7 @@ export default class extends Phaser.Scene {
 
     var loadingConf = {
       x: 260,
-      y: 200,
+      y: 140,
       text: 'Player 1 pick a player to play with',
       style: {
         fontSize: '25px',
@@ -56,7 +56,7 @@ export default class extends Phaser.Scene {
 
     var loadingConf2 = {
       x: 260,
-      y: 300,
+      y: 250,
       text: 'Player 2 pick a player to play with',
       style: {
         fontSize: '25px',
@@ -70,7 +70,7 @@ export default class extends Phaser.Scene {
 
     var ballConf = {
       x: 310,
-      y: 400,
+      y: 360,
       text: 'Pick a ball to play with',
       style: {
         fontSize: '25px',
@@ -82,14 +82,14 @@ export default class extends Phaser.Scene {
 
     var balls = this.make.text(ballConf)
 
-    let ball = this.add.image(200, 470, 'ball')
-    let boule = this.add.image(400, 470, 'boule')
-    let beach = this.add.image(600, 470, 'beach')
+    let ball = this.add.image(200, 425, 'ball')
+    let boule = this.add.image(400, 425, 'boule')
+    let beach = this.add.image(600, 425, 'beach')
 
     this.make.text(soundInstruction)
 
     const backInstruction = {
-      x: 150,
+      x: 230,
       y: 510,
       text: 'Start the game :',
       style: {
@@ -103,19 +103,19 @@ export default class extends Phaser.Scene {
 
     this.make.text(backInstruction)
 
-    let soundOnButton = this.add.image(400, 140, 'soundOnButton').setDepth(1)
+    let soundOnButton = this.add.image(400, 85, 'soundOnButton').setDepth(1)
 
-    let soundOffButton = this.add.image(500, 140, 'soundOffButton').setDepth(1)
+    let soundOffButton = this.add.image(500, 85, 'soundOffButton').setDepth(1)
 
-    let backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.9, 'backButton').setDepth(1)
+    let backButton = this.add.image(520, 530, 'backButton').setDepth(1)
 
-    let lapin = this.add.image(200, 260, 'lapin')
-    let mario = this.add.image(400, 260, 'mario')
-    let flower = this.add.image(600, 260, 'flower')
+    let lapin = this.add.image(200, 205, 'lapin')
+    let mario = this.add.image(400, 205, 'mario')
+    let flower = this.add.image(600, 205, 'flower')
 
-    let lapinP2 = this.add.image(200, 360, 'lapin')
-    let marioP2 = this.add.image(400, 360, 'mario')
-    let flowerP2 = this.add.image(600, 360, 'flower')
+    let lapinP2 = this.add.image(200, 315, 'lapin')
+    let marioP2 = this.add.image(400, 315, 'mario')
+    let flowerP2 = this.add.image(600, 315, 'flower')
 
     soundOnButton.setInteractive()
     soundOffButton.setInteractive()
