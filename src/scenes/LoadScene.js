@@ -13,19 +13,7 @@ export default class extends Phaser.Scene {
   preload () {
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
-    var loadingConf = {
-      x: 250,
-      y: 500,
-      text: 'The game is loading...',
-      style: {
-        fontSize: '54px',
-        fontFamily: 'Monoton',
-        color: '#ff0000',
-        align: 'center',
-        lineSpacing: 44
-      } }
-
-    var tryGain = this.make.text(loadingConf)
+    this.add.text(100, 100, 'loading Game...')
 
     WebFont.load({
       google: {
