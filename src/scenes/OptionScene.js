@@ -20,9 +20,24 @@ export default class extends Phaser.Scene {
 
     this.add.image(0, 0, 'title_bg').setOrigin(0).setDepth(0)
 
-    let soundOnButton = this.add.image(this.game.renderer.width / 1.85, this.game.renderer.height * 0.65, 'soundOnButton').setDepth(1)
+    const instructionsConf = {
+      x: this.game.renderer.width / 3.50,
+      y: this.game.renderer.height * 0.61,
+      text: 'Sound:',
+      style: {
+        fontSize: '40px',
+        fontFamily: 'Bangers',
+        color: '#ffffff',
+        align: 'center',
+        lineSpacing: 44
+      }
+    }
+
+    this.make.text(instructionsConf)
 
     let soundOffButton = this.add.image(this.game.renderer.width / 2.20, this.game.renderer.height * 0.65, 'soundOffButton').setDepth(1)
+
+    let soundOnButton = this.add.image(this.game.renderer.width / 1.85, this.game.renderer.height * 0.65, 'soundOnButton').setDepth(1)
 
     soundOnButton.setInteractive()
 

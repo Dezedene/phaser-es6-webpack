@@ -24,7 +24,7 @@ export default class extends Phaser.Scene {
         align: 'center',
         lineSpacing: 44
       } }
- 
+
     var tryGain = this.make.text(loadingConf)
 
     WebFont.load({
