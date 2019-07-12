@@ -15,13 +15,13 @@ export default class extends Phaser.Scene {
   }
 
   create () {
-    this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.30, 'logo').setDepth(1)
+    this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.25, 'title').setDepth(1).setScale(1.7)
 
     this.add.image(0, 0, 'title_bg').setOrigin(0).setDepth(0)
 
-    let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.7, 'start_button').setDepth(1)
+    let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.65, 'start_button').setDepth(1)
 
-    let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.7 + 100, 'option_button').setDepth(1)
+    let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.65 + 100, 'option_button').setDepth(1)
 
     this.sound.play('title_music')
 

@@ -24,6 +24,8 @@ export default class extends Phaser.Scene {
 
     this.load.image('title_bg', 'asserts/backgrounds/volcano-game-background-5.jpg')
 
+    this.load.image('title', 'asserts/various/headhunter.png')
+
     this.load.image('start_button', 'asserts/various/start.png')
 
     this.load.image('option_button', 'asserts/various/option.png')
